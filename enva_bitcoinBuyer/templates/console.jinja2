@@ -1,0 +1,17 @@
+ {%  extends "base.jinja2" %}
+ {% block title %} Bitcoinist Console {{ input }} {% endblock %}
+ {%  block body %} 
+ <div class="container">  
+ 
+<h3>Console Messages</h3>
+<br />
+
+<p>Passing variables through Query String Input: /query?a=test&b=123, or /query?a=x&b=y</p>
+<a href="/query?a=test&b=123">query</a> 
+Name : {{ input }}<br />
+Message:  {{ message }}  
+
+<br />
+ 
+</div>
+{% endblock %}
