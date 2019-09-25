@@ -1,45 +1,49 @@
  {%  extends "base.jinja2" %}
  {% block title %} Home {{ input }} {% endblock %}
- {%  block body %} 
-
-<div class="container"> 
+ {%  block body %}  
+<div class="container content"> 
 <h3>Home Console</h3>
-<hr>
-<table class="table">
+
+<div class="tablediv">
+<table class="table table-hover">
 <thead>
 	<tr>
-		<th scope="col">Coin</th>
-		<th scope="col">Added</th>
+		<th scope="col">Coin</th> 
+		<th scope="col">Date Added</th>
 		<th scope="col">Action</th>
 	</tr>
 </thead>
-	<tr>
-		<th scope="row"></th>
-		<td></td>
-		<td></td>
+{% for task in tasks %}
+	<tr> 
+		<td>{{ task.content }}</td>
+		<td>{{ task.date_created.date() }}</td>
 		<td>
 			<a href="">Delete</a><br />
 			<a href="">Update</a>
 		</td>
 	</tr>
+{% endfor %}  
 </table>
-<hr> 
-<form method="POST" action="/">
-	<br><br>
+</div>
+ 
+<form action="/home" method="POST" >
+
+	<label>Select Currency</label><br />
+	<input type="text" name="content" id="content">
+	 <input type="submit" value="content"> 
+	 <hr>
 	<label>Buy Price Per Coin</label>
 	<div class="input-group">
- 		<span class="input-group-addon">BTC</span>
-		<input type="text" name="coin" id="coin">
- 		<input type="text" name="btc" class="form-control" value="{{request.form.btc}}"> 
+ 		<span class="input-group-addon">BTC</span> 
+ 	 <input type="text" name="btc" class="form-control" value="{{request.form.btc}}">   
   	</div> 
 	<div class="form-group">
 		<label>Profit Percent Required</label>
- 	<input type="text" name="profit"	class="form-control" value="{{request.form.profit}}"> 
+ 	 <input type="text" name="profit"	class="form-control" value="{{request.form.profit}}"> 
 	</div>
-	<button type="submit" value="Add Coin" class="btn btn-primary">Submit</button>
+ <button type="submit" value="Add Coin" class="btn btn-primary">Submit</button>  
 </form>
-
-<br /> 
+ 
  {% with messages = get_flashed_messages() %}
   {% if messages %}
     <ul class=flashes>

@@ -1,6 +1,6 @@
 from flask import flash
 
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -19,42 +19,46 @@ class Tracker(db.Model):
         return '<Task %r>' % self.id
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')  # , methods=['GET', 'POST'])
 def index():
-        if request.method == 'POST':
-            return 'testing db!'
-        else: 
-            return render_template("home.jinja2")
-    # return "Console"
+    return render_template("home.jinja2")
 
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
-        if request.method == 'POST':
-            return 'testing db!'
-        else: 
-                # btc = float(request.form['btc'])
-                # profit = float(request.form['profit'])
+    if request.method == 'POST':
+        task_content = request.form['content']
+        new_task = Tracker(content=task_content)
 
-        #         print(btc)
-        #         print(profit)
+        try:
+            db.session.add(new_task)
+            db.session.commit()
+            return redirect('/home')
+        except:
+            return 'Oops.. there is an issue adding your coin'
+    else:
+        tasks = Tracker.query.order_by(Tracker.date_created).all()
+        return render_template("home.jinja2", tasks=tasks)
+        # btc = float(request.form['btc'])
+        # profit = float(request.form['profit'])
 
-        #         a = float(profit) / 100
-        #         print(a)
+    #         print(btc)
+    #         print(profit)
 
-        #         b = 1.005012531 * float(btc)
-        #         print(float(b))
+    #         a = float(profit) / 100
+    #         print(a)
 
-        #         s = float(1 + a) * float(b)
-        #         print("%.16f" % s)
+    #         b = 1.005012531 * float(btc)
+    #         print(float(b))
 
-        #         flash('BTC. ' + "%.16f" % s, 'success')
-            return render_template("home.jinja2")
-    # "ArmChair Bitcoinist"
+    #         s = float(1 + a) * float(b)
+    #         print("%.16f" % s)
+
+    #         flash('BTC. ' + "%.16f" % s, 'success')
 
 
 @app.route('/home/console')
-def console():  
+def console():
     return render_template("console.jinja2")
 
 
@@ -93,8 +97,9 @@ def registerPost():
     gender = request.args.get("gender")
     if not name or not gender:
         return render_template("failure.jinja2")
-    members.append(f"{name} with gender {gender}")
-    return redirect("/registrants")
+    else:
+        members.append(f"{name} with gender {gender}")
+        return redirect("/registrants")
 
 # URL: http://localhost:5000/query?a=test&b=123
 @app.route('/query')
@@ -102,8 +107,8 @@ def query():
     a = request.args.get('a')
     b = request.args.get('b')
     return "<h4>Variable a = {0}<br />while Variable b = {1}</h4><a href='/home'>back</a>".format(a, b)
- 
+
 
 if __name__ == '__main__':
-    app.secret_key = 'xxxxxxx' # ../xx/www/.nogit
+   # app.secret_key = 'xxxxxxx'  # ../xx/www/.nogit
     app.run(debug=True)

@@ -1,11 +1,19 @@
 body {
     padding: 20px 20px;
-    background-color: aliceblue;
+    background-image: url('../img/greeninvert5.png');
+    background-color: rgba(240, 248, 255, 0.793);
     color: #0c4a7f;
 }
 
+th,
+td {
+    background-color: white;
+    border: solid 1px rgba(61, 61, 75, 0.26);
+    ;
+}
+
 header {
-    background-color: rgba(124, 188, 243, .15);
+    background-color: rgba(124, 187, 243, 0.404);
     color: #0c4a7f;
     border-radius: 8%;
     padding: 10px;
@@ -51,4 +59,27 @@ a.login {
     font-size: 1.1rem;
     float: right;
     padding-right: 10px;
+}
+
+.message {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+span.query {
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 5px;
+    margin: 10px 0px;
+    border: solid 1px rgba(0, 0, 255, 0.459);
+}
+
+span.query:hover {
+    text-decoration: none;
+}
+
+.tablediv {
+    max-height: 300px;
+    overflow-y: scroll;
 }
