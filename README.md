@@ -19,8 +19,16 @@ _Thomas Maestas_
 $ set FLASK_APP=enva_bitcoinBuyer
 $ flask run
 ``` 
+##### DB:
+```python
+>> from _init_ import db
+>> db.create_all()
+```
+##### Libraries:
+* beautifulsoup4    4.8.0
 * boto3             1.9.233
 * botocore          1.12.233
+* bs4               0.0.1
 * certifi           2019.3.9
 * chardet           3.0.4
 * Click             7.0
@@ -28,6 +36,7 @@ $ flask run
 * Cython            0.29.13 
 * docutils          0.15.2
 * Flask             1.0.3
+* Flask-SQLAlchemy  2.4.1
 * idna              2.8
 * itsdangerous      1.1.0
 * Jinja2            2.10.1
@@ -50,11 +59,16 @@ $ flask run
 * seaborn           0.9.0
 * setuptools        41.0.1
 * six               1.12.0
+* soupsieve         1.9.3
+* SQLAlchemy        1.3.8
+* sqlparse          0.3.0
 * sqlparse          0.3.0
 * twython           3.7.0
 * urllib3           1.25.3
 * Werkzeug          0.15.4
-* wheel             0.33.4''' 
+* wheel             0.33.4
+* zope.interface    4.6.0
+''' 
  
 ### Todos
 
@@ -78,3 +92,4 @@ MIT
    [AWS SDK]: <https://aws.amazon.com/sdk-for-python/>
    
    Author website: [thomasmaestas.net](https://thomasmaestas.net)
+

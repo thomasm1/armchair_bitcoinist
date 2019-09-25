@@ -4,6 +4,41 @@
 
 <div class="container"> 
 <h3>Home Console</h3>
+<hr>
+<table class="table">
+<thead>
+	<tr>
+		<th scope="col">Coin</th>
+		<th scope="col">Added</th>
+		<th scope="col">Action</th>
+	</tr>
+</thead>
+	<tr>
+		<th scope="row"></th>
+		<td></td>
+		<td></td>
+		<td>
+			<a href="">Delete</a><br />
+			<a href="">Update</a>
+		</td>
+	</tr>
+</table>
+<hr> 
+<form method="POST" action="/">
+	<br><br>
+	<label>Buy Price Per Coin</label>
+	<div class="input-group">
+ 		<span class="input-group-addon">BTC</span>
+		<input type="text" name="coin" id="coin">
+ 		<input type="text" name="btc" class="form-control" value="{{request.form.btc}}"> 
+  	</div> 
+	<div class="form-group">
+		<label>Profit Percent Required</label>
+ 	<input type="text" name="profit"	class="form-control" value="{{request.form.profit}}"> 
+	</div>
+	<button type="submit" value="Add Coin" class="btn btn-primary">Submit</button>
+</form>
+
 <br /> 
  {% with messages = get_flashed_messages() %}
   {% if messages %}
@@ -13,24 +48,8 @@
     {% endfor %}
     </ul>
   {% endif %}
-{% endwith %}  
+{% endwith %}   
 
-<form method="POST" action="">
-	<br><br>
-	<label>Buy Price Per Coin</label>
-	<div class="input-group">
- 		<span class="input-group-addon">BTC</span>
-  		<input type="text" name="btc" class="form-control" value="{{request.form.btc}}">
-  	</div>
-
-	<div class="form-group">
-		<label>Profit Percent Required</label>
-		<input type="text" name="profit"	class="form-control" value="{{request.form.profit}}">
-	</div>
-
-
-<button type="submit" class="btn btn-primary">Submit</button>
-</form>
 
 </div>
 

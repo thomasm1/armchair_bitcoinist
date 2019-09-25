@@ -1,36 +1,55 @@
 from flask import flash
 
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, url_for
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coins.db'
+db = SQLAlchemy(app)
 members = []
 
-@app.route('/')
+
+class Tracker(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.String(200), nullable=False)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repre__(self):
+        return '<Task %r>' % self.id
+
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("home.jinja2")
+        if request.method == 'POST':
+            return 'testing db!'
+        else: 
+            return render_template("home.jinja2")
     # return "Console"
 
 
 @app.route('/home', methods=['GET', 'POST'])
 def home():
         if request.method == 'POST':
-                btc = float(request.form['btc'])
-                profit = float(request.form['profit'])
+            return 'testing db!'
+        else: 
+                # btc = float(request.form['btc'])
+                # profit = float(request.form['profit'])
 
-                print(btc)
-                print(profit)
+        #         print(btc)
+        #         print(profit)
 
-                a = float(profit) / 100
-                print(a)
+        #         a = float(profit) / 100
+        #         print(a)
 
-                b = 1.005012531 * float(btc)
-                print(float(b))
+        #         b = 1.005012531 * float(btc)
+        #         print(float(b))
 
-                s = float(1 + a) * float(b)
-                print("%.16f" % s)
+        #         s = float(1 + a) * float(b)
+        #         print("%.16f" % s)
 
-                flash('BTC. ' + "%.16f" % s, 'success')
-        return render_template("home.jinja2")
+        #         flash('BTC. ' + "%.16f" % s, 'success')
+            return render_template("home.jinja2")
     # "ArmChair Bitcoinist"
 
 
