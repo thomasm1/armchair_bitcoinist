@@ -1,0 +1,18 @@
+{% extends "base.jinja2" %} {% block body %}
+<div class="container content">
+    <h3 style="text-align:center">Update Console</h3>
+
+    <div class="form">
+        <form action="/update/{{task.id}}" method="POST">
+
+            <label>Select Currency</label><br />
+            <input type="text" name="content" id="content" value="{{task.content}}">
+            <input type="submit" value="Update">
+            <hr>
+
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

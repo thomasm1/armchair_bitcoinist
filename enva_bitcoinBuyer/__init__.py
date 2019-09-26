@@ -56,6 +56,32 @@ def home():
 
     #         flash('BTC. ' + "%.16f" % s, 'success')
 
+@app.route('/delete/<int:id>')
+def delete(id):
+    task_to_delete = Tracker.query.get_or_404(id)
+
+    try:
+        db.session.delete(task_to_delete)
+        db.session.commit()
+        return redirect('/home')
+    except:
+        return 'Oops, there has been a problem deleting that ...'
+
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    task = Tracker.query.get_or_404(id)
+
+    if request.method == 'POST':
+        task.content = request.form['content']
+    
+        try: 
+            db.session.commit()
+            return redirect('/home')
+        except:
+            return 'Oops, there has been a problem posting that ...'
+
+    else: 
+        return render_template('update.html', task=task)
 
 @app.route('/home/console')
 def console():
