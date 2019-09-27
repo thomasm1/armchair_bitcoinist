@@ -1,8 +1,9 @@
 ## Armchair Bitcoinist
 #### Python Flask Application
 _Thomas Maestas_
+
 | Fx | Tools | URLS |
-| ------ |------ | ------ |
+|------|:---------:|------:|
 | LIB | Flask (WerkZeug Toolkit) | [Flask]  | 
 | UI | JINJA2 template engine |  [Jinja2] | 
 | DATAVIZ | Matplotlib (low-level) |  [Matplotlib]  |
@@ -80,16 +81,17 @@ License
 MIT
 
 ** Software, :-)**
-[Flask]: <http://flask.palletsprojects.com/en/1.1.x/>
-   [Jinja2]: <https://jinja.palletsprojects.com/en/2.10.x/>
-   [Matplotlib]: <https://matplotlib.org/>
-   [Seaborn]: <https://seaborn.pydata.org/>
-   [NumPy]: <https://numpy.org/>
-   [Pandas]: <https://pandas.pydata.org/>
-   [requests]: <https://2.python-requests.org/en/master/> 
-   [requests:oathlib]:<https://github.com/requests/requests-oauthlib>
-   [bs4]: <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>
-   [AWS SDK]: <https://aws.amazon.com/sdk-for-python/>
+
+* [Flask]: <http://flask.palletsprojects.com/en/1.1.x/>
+* [Jinja2]: <https://jinja.palletsprojects.com/en/2.10.x/>
+* [Matplotlib]: <https://matplotlib.org/>
+* [Seaborn]: <https://seaborn.pydata.org/>
+* [NumPy]: <https://numpy.org/>
+* [Pandas]: <https://pandas.pydata.org/>
+* [requests]: <https://2.python-requests.org/en/master/> 
+* [requests:oathlib]:<https://github.com/requests/requests-oauthlib>
+* [bs4]: <https://www.crummy.com/software/BeautifulSoup/bs4/doc/>
+* [AWS SDK]: <https://aws.amazon.com/sdk-for-python/>
    
    Author website: [thomasmaestas.net](https://thomasmaestas.net)
 

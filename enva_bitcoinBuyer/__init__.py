@@ -1,6 +1,4 @@
-from flask import flash
-
-from flask import Flask, request, render_template, url_for, redirect
+from flask import Flask, flash, jsonify, request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
@@ -8,6 +6,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coins.db'
 db = SQLAlchemy(app)
 members = []
+coins = [{'currency': 'Bitcoin'},{'currency': 'Ethereum'},{'currency': 'Litecoin'}]
 
 
 class Tracker(db.Model):
@@ -18,14 +17,9 @@ class Tracker(db.Model):
     def __repre__(self):
         return '<Task %r>' % self.id
 
-
-@app.route('/')  # , methods=['GET', 'POST'])
+ 
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template("home.jinja2")
-
-
-@app.route('/home', methods=['GET', 'POST'])
-def home():
     if request.method == 'POST':
         task_content = request.form['content']
         new_task = Tracker(content=task_content)
@@ -33,12 +27,28 @@ def home():
         try:
             db.session.add(new_task)
             db.session.commit()
-            return redirect('/home')
+            return redirect('/')
         except:
             return 'Oops.. there is an issue adding your coin'
     else:
         tasks = Tracker.query.order_by(Tracker.date_created).all()
         return render_template("home.jinja2", tasks=tasks)
+
+
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
+    return render_template("dashboard.jinja2")
+
+@app.route('/currencies', methods=['GET'])
+def returnAll():
+    return jsonify({'coins': coins})
+
+@app.route('/currencies/<string:currency>', methods=['GET'])
+def returnOne(currency):
+    findcoins = [coin for coin in coins if coin['currency'] == coin]
+    return jsonify({'coin': findcoins[0]})
+
+
         # btc = float(request.form['btc'])
         # profit = float(request.form['profit'])
 
@@ -63,7 +73,7 @@ def delete(id):
     try:
         db.session.delete(task_to_delete)
         db.session.commit()
-        return redirect('/home')
+        return redirect('/')
     except:
         return 'Oops, there has been a problem deleting that ...'
 
@@ -76,36 +86,19 @@ def update(id):
     
         try: 
             db.session.commit()
-            return redirect('/home')
+            return redirect('/')
         except:
             return 'Oops, there has been a problem posting that ...'
 
     else: 
         return render_template('update.html', task=task)
 
-@app.route('/home/console')
-def console():
-    return render_template("console.jinja2")
 
-
-@app.route('/home/messages')
+@app.route('/messages')
 def messages():
     return render_template("messages.jinja2")
 
-
-@app.route('/home/<input>')
-def input(input):
-    return "Input: {} <br /><br /><a href='/home'>back</a>".format(input)
-
-
-@app.route('/home/<input>/<message>')
-def home_input_message(input, message):
-    return render_template("home_input_message.jinja2",
-                           input=input,
-                           message=message)
-    # return "{0}, {1}".format(name, message)
-
-
+ 
 @app.route('/register')
 def register():
     return render_template("register.jinja2")
@@ -126,15 +119,7 @@ def registerPost():
     else:
         members.append(f"{name} with gender {gender}")
         return redirect("/registrants")
-
-# URL: http://localhost:5000/query?a=test&b=123
-@app.route('/query')
-def query():
-    a = request.args.get('a')
-    b = request.args.get('b')
-    return "<h4>Variable a = {0}<br />while Variable b = {1}</h4><a href='/home'>back</a>".format(a, b)
-
-
+ 
 if __name__ == '__main__':
    # app.secret_key = 'xxxxxxx'  # ../xx/www/.nogit
     app.run(debug=True)
