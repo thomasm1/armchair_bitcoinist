@@ -6,7 +6,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///coins.db'
 db = SQLAlchemy(app)
 members = []
-coins = [{'currency': 'Bitcoin'},{'currency': 'Ethereum'},{'currency': 'Litecoin'}]
+coins = [{'currency': 'Bitcoin'}, {
+    'currency': 'Ethereum'}, {'currency': 'Litecoin'}]
 
 
 class Tracker(db.Model):
@@ -17,7 +18,7 @@ class Tracker(db.Model):
     def __repre__(self):
         return '<Task %r>' % self.id
 
- 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -35,19 +36,33 @@ def index():
         return render_template("home.jinja2", tasks=tasks)
 
 
-@app.route('/dashboard', methods=['GET'])
+class Profit(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    profit_content = db.Column(db.String(200), nullable=False)
+
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repre__(self):
+        return '<Profit_tasks %r>' % self.id
+
+
+@app.route('/dashboard', methods=['GET', 'POST'])
 def dashboard():
+    if request.method == 'POST':
+        btc_content = request.form['profit_content']
+        profit_req = Profit(profit_content=btc_content)
+
+        try:
+            db.session.add(profit_req)
+            db.session.commit()
+            return redirect('/dashboard')
+        except:
+            return 'Oops.. there is an issue adding your profit instruction'
+    else:
+        profit_tasks = Profit.query.order_by(Profit.date_created).all()
+        return render_template("dashboard.jinja2", profit_tasks=profit_tasks)
+
     return render_template("dashboard.jinja2")
-
-@app.route('/currencies', methods=['GET'])
-def returnAll():
-    return jsonify({'coins': coins})
-
-@app.route('/currencies/<string:currency>', methods=['GET'])
-def returnOne(currency):
-    findcoins = [coin for coin in coins if coin['currency'] == coin]
-    return jsonify({'coin': findcoins[0]})
-
 
         # btc = float(request.form['btc'])
         # profit = float(request.form['profit'])
@@ -64,7 +79,20 @@ def returnOne(currency):
     #         s = float(1 + a) * float(b)
     #         print("%.16f" % s)
 
-    #         flash('BTC. ' + "%.16f" % s, 'success')
+    #         flash('BTC. ' + "%.16f" % s, 'success')  
+
+
+
+@app.route('/currencies', methods=['GET'])
+def returnAll():
+    return jsonify({'coins': coins})
+
+@app.route('/currencies/<string:currency>', methods=['GET'])
+def returnOne(currency):
+    findcoins = [coin for coin in coins if coin['currency'] == currency]
+    return jsonify({'coin': findcoins[0]})
+
+
 
 @app.route('/delete/<int:id>')
 def delete(id):
