@@ -4,7 +4,9 @@ import numpy as np
 
 data = keras.datasets.imdb
 
-(train_data, train_labels), (test_data, test_labels) = data.load_data(num_words=10000)
+#(train_data, train_labels), (test_data, test_labels) = data.load_data(num_words=10000)
+(train_data, train_labels), (test_data, test_labels) = keras.datasets.mnist.load_data()
+ 
 print(train_data[0])
  
 word_index = data.get_word_index()

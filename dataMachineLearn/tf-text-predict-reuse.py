@@ -53,7 +53,7 @@ def review_encode(s):
     return encoded
 
 model = keras.models.load_model("model.h5")
-
+with open 
 with open("new_text_good.txt", encoding="utf-8") as f:
 # with open("new_text_good2.txt", encoding="utf-8") as f:
 # with open("new_text_bad.txt", encoding="utf-8") as f:
@@ -67,6 +67,8 @@ with open("new_text_good.txt", encoding="utf-8") as f:
       #  print(predict[0])   # .00202 -- good-1:  #  .000846 good-2:  #   .00415 bad-1: incorrect 
 
 print("Prediction: " + str(predict[0]))  # 0.002196 bad review ... less sure, but correct  [using 10 epochs] 
+
+
 '''
 test_review = test_data[0]
 predict = model.predict([test_review])

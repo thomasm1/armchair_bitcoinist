@@ -2,6 +2,44 @@
 #### Python Flask Application
 _Thomas Maestas_
 
+'''
+flask create_tables
+sqlite3 enva_bitcoinBuyer/db.sqlite3
+
+.tables # coinInquire user
+'''
+
+## Directive #1 BITCOIN LEVERAGE
+#### >8.4k... BULLISH
+#### <7.7k... BEARISH
+#### ***Price tells us: What is happening;
+#### ***Volume tells us: How it is happening;
+#### *** Wide-range igniting bar= low green;smaller low red; high green
+#### *** Narrow-range resting bar= low green;smaller low red;'
+#### smallerer low green; high green; Continuation bar=tall,long red; tall,short green; lower red**Bollinger Band
+
+* 1-week moving average: most important to keep as average. 8300 needed by sun 9/29--closed at*
+
+* 100-Day - set to NULL
+* 50-Day - NULL
+* 200-daily-moving-average -always well below since April- crossed below on 9/26.*
+* Weekly EMA Ribbon - very powerful: 9/30:: 7.7! is low; 8.6 is high. *
+* VPVR - do notice; not in formula; still holding Volume-per-Volume range: bottom support is 7.7k, next support is @5k.
+
+# Only Indicator!! Discard others for BTC, not EETH
+## Stochastic RSI Relative Strength Indicator (momentum in bull market): had a cross on the way down: if goes down below 70, big trouble
+
+* Fibonacci Retracement Levels: tells what level at. ... Once we break a level (broke .38) likely will jump to next level. Right now, just below .5.  If end of Sept, below 8.3k, then likely 7.3k.  [14k, could not break a fib level. On way down, 10k is next level. If we break 21-wk moving average, then  Next level is 6.3k ...(yet strong support between 7.3->6.3.] 
+
+* Oscillators
+Awesome Oscillators
+**Com Channel Index
+
+``` 3-bar :1st (or 2nd) bar must be wide-range (than avg), igniting bar : (can't be 4th or 5th bar) Long :over resistance;  Short : under support, longer than usual; 
+Next bar is the narrow, resting upper 50%; equal high as 1st; (put stop loss a few pennies under 2nd bar low; 3rd-bar breaks high of 1st and 2nd bar
+#A : 4-bar (same, yet has two narrow, resting bars) whichever of 2 resting's low is a stop loss. 
+```
+
 | Fx | Tools | URLS |
 |------|:---------:|------:|
 | LIB | Flask (WerkZeug Toolkit) | [Flask]  | 

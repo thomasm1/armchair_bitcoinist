@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, redirect
 app = Flask(__name__)
 
+## Temp data until both MySQL sans SQLalchemy & SQLite with SQLalchemy 
 currencies = [{'id': 1, 'name': 'LiteCoin', 'symbol':'LTC'}, {'id': 2, 'name': 'Bitcoin', 'symbol':'BTC'}, {'id': 3, 'name': 'Ethereum', 'symbol':'ETH'}]
 
 @app.route('/currency', methods=['GET'])
@@ -35,4 +36,4 @@ def re_direct():
     return redirect("/currency") 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5010)
+    app.run(debug=True, port=5010)  # host = '127.0.0.1'   http://{{host}}:{{port}}/

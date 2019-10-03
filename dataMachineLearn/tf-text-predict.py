@@ -31,6 +31,9 @@ model = keras.Sequential()
 model.add(keras.layers.Embedding(88000, 16))  # 1.) limit 88000 word-vectors; 2.) 16 vectors per-word embedding context
 model.add(keras.layers.GlobalAveragePooling1D()) # 3.) consolidate embedding
 model.add(keras.layers.Dense(16, activation="relu")) # 4.) rect. linear unit - functions
+    ## Dying Relus:: If neuron is initialized poorly, may not fire for entire training dataset.
+    ## Large parts of network could be dead RELU's!!
+
 model.add(keras.layers.Dense(1, activation="sigmoid")) # 5.) outputs in range (0, 1), ideal for binary class"n to find probability of data belonging to class.
 model.summary()
 model.compile(optimizer="adam", loss="binary_crossentropy", metrics=["accuracy"]) # 6.) (Unlike Softmax loss) Independent for each vector component (class)
@@ -43,12 +46,15 @@ y_train = train_labels[10000:]
 
 fitModel = model.fit(x_train, y_train, epochs=40, batch_size=512, validation_data=(x_val, y_val), verbose=1) # 512 reviews/40 versions; 
 #fitModel = model.fit(x_train, y_train, epochs=10, batch_size=512, validation_data=(x_val, y_val), verbose=1) # 512 reviews/10 versions; 
+### ... batchSize: # of training instances the net evalutes per weight update step==>
+###  ==> large batch size: more compute speed; smaller batch size: better generalization!!
 
 results = model.evaluate(test_data, test_labels)
 print(results)  # loss .3298  accuracy: 0.8716
 
 test_review = test_data[0]
 predict = model.predict([test_review])
+## Must update weights & biases to decrease loss function
 print("Review: ")
 print(decode_review(test_review))
 print("Actual: " + str(test_labels[0]))  # 0 
