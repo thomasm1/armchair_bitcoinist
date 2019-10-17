@@ -13,9 +13,9 @@ def index():
 def ask():
     return render_template('ask.html')
 
-@main.route('/respa')
-def respa():
-    return render_template('respa.html')
+@main.route('/answer')
+def answer():
+    return render_template('answer.html')
 
 @main.route('/login')
 def login():
@@ -29,8 +29,8 @@ def coinInquire():
 def register():
     return render_template('register.html')
 
-@main.route('/unrespaed')
-def unrespaed():
-    return render_template('unrespaed.html')
+@main.route('/unanswered')
+def unanswered():
+    return render_template('unanswered.html')
 
 @main.route()
